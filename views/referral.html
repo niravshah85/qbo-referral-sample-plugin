@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/referrer.css">
+        <script>
+            window.addEventListener("message", function (a) {
+                if (a.origin.indexOf("intuit.com") >= 1 && a.data && a.data.initXDM) {
+                    var b = document.createElement("script");
+                    b.setAttribute("type", "text/javascript");
+                    b.innerHTML = a.data.initXDM;
+                    document.getElementsByTagName("head")[0].appendChild(b)
+                }
+            });            
+        </script>
+    </head>
+    <body class="body">
+        <div class="table header stretch">
+            <div class="tableRow">
+                <div class="tableCell rightDivider trowserTitle">Refer a friend</div>
+                <div class="tableCell closeTrowser" id="closeTrowser">X</div>
+            </div>
+        </div>
+        
+        <div class="stretch pageTitle centerAlign">Make someone's day with QuickBooks</div>
+
+        <div class="contentTable">
+            <div class="tableRow">
+                <div class="column">
+                    <div class="leftColumnContent">
+                        <div class="reward">
+                            <div class="rewardDetail">
+                                <div class="amazon"></div>
+                                <div class="rewardDetailText">Get a $25 Amazon gift card when your friend becomes a paid subscriber</div>
+                            </div>
+                            <div class="rewardDetail">
+                                <div class="amazon"></div>
+                                <div class="rewardDetailText">Your friend gets 30 days free and a 20% discount for 6 months</div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div id="productPickerSection" class="hide">
+                            <div class="label">Which product do you want to share?</div>
+                            <div>
+                                <select id="productPicker" class="productPicker"></select>
+                            </div>
+                        </div>                        
+
+                        <div class="label hide" id="defaultProductSection">You are recommending Quickbooks</div>
+                    </div>
+                    
+                </div>
+                <div class="column">
+                    <div class="rightColumnContent">
+                        <div class="label">To</div>
+                        <div><input type="text" id="toEmail" /></div>
+
+                        <div class="label">From</div>
+                        <div><input type="text" id="fromEmail" /></div>
+
+                        <div class="label">Message</div>
+                        <div>
+                            <textarea class="emailMessage" id="emailMessage">I wanted to refer QuickBooks. I think you'll love it!</textarea>
+                        </div>                        
+                        <button type="button" class="sendButton" id="sendButton">Send email</button>                    
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <script src="/javascripts/referral.js"></script>
+    </body>
+</html>

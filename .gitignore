@@ -1,0 +1,33 @@
+node_modules/
+bower_components/
+
+
+#IDE Specific files
+
+#SublimeText
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+#IntelliJ
+.idea/
+*.iml
+atlassian-ide-plugin.xml
+
+#Eclipse
+.project
+.settings
+
+#emacs generated autosave file
+*.*~
+
+#vim generated autosave file
+**.swp
+**.swo
+**.swn
+
+#archive.zip
+archive.zip
+
+#log
+*.log

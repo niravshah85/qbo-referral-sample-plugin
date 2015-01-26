@@ -1,0 +1,176 @@
+.body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+}
+
+input[type="text"] {
+    height: 25px;
+    width: 300px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.table {
+    display: table;
+}
+
+.tableRow {
+    display: table-row;
+}
+
+.tableCell {
+    display: table-cell;
+}
+
+.hide {
+    display: none;
+}
+
+.stretch {
+    width: 100%;
+}
+
+.centerAlign {
+    text-align: center;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.width50 {
+    width: 50%;
+}
+
+.column {
+    display: table-cell;    
+    width: 50%;
+    vertical-align: top;
+}
+
+.leftColumnContent {
+    margin-right: 70px;
+    float: right;
+}
+
+.rightColumnContent {
+    margin-left: 70px;
+    float: left;
+}
+
+.inlineBlock {
+    display: inline-block;
+}
+
+.pageTitle {
+    font-size: 40px;
+    margin-top: 70px;
+}
+
+.header {
+    height: 40px;
+    background-color: #486c8f;
+    position: relative;
+    z-index: 3;
+    zoom: reset;    
+    color: #fff;    
+}
+
+.closeTrowser {
+    width: 45px;
+    height: 40px;    
+    cursor: pointer;
+    font-size: 24px;    
+    line-height: 40px;
+    text-align: center;
+}
+
+.rightDivider {
+    border-right: 1px solid #6e8ba8;
+}
+
+.trowserTitle {
+    padding-left: 15px;
+    font-size: 22px;    
+}
+
+.amazon {
+    background: url("/images/amazon.jpg") no-repeat;
+    width: 55px;
+    height: 35px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rewardDetailText {
+    display: inline-block;    
+    width: 250px;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+.rewardDetail {
+    margin-bottom: 40px;
+}
+
+.contentTable {
+    width: 100%;
+    display: table;
+    margin-top: 50px;    
+}
+
+.emailMessage {
+    width: 300px;
+    height: 150px;
+}
+
+button {
+    color: white;
+    box-shadow: none;
+    background-image: linear-gradient(to bottom, #3e6cc9 0%, #2e50b6 100%);
+    background-clip: padding-box;
+    border-radius: 2px;
+    font-family: "Helvetica", "Arial", sans-serif;
+    min-width: 80px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 20px;
+    border: 0;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+hr {
+    margin-bottom: 40px;
+}
+
+.sendButton {
+    margin-top: 30px;
+    float: right;
+}
+
+.productPicker {
+    font-size: 16px;
+    width: 150px;    
+}
+
+.productList {
+    left: 275px;
+    position: absolute;
+    top: 168px;
+}
+
+
