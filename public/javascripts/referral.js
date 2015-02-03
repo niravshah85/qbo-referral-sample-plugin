@@ -52,7 +52,7 @@ var qboXDMReady = function () {
                     qboXDM.closeTrowser();
 
                     // show the success dialog msg                    
-                    qboXDM.showSimpleDialog("Referral sent", 
+                    qboXDM.showDialogWithCustomButtons("Referral sent",
                         "When your friend subscribed, you will receive an email about your Amazon gift card", 
                         [
                             {
@@ -63,15 +63,21 @@ var qboXDMReady = function () {
                                 "primary": true, 
                                 "section": 1
                             }
-                        ], 
-                        [
-                            function () {                                
-                                // do something when user clicks on "refer another friend"
-                            }.bind(this),
-                            function () {
-                                // do nothing when user clicks on close button
-                            }.bind(this)
-                        ]                        
+                        ],
+                        {
+                            "iconClass": "confirmIcon"
+                        },
+                        function (evt) {
+                            switch (evt.labelId) {
+                                case 0:
+                                    qboXDM.navigate("approute://referrals");
+                                    break;
+
+                                case 1:
+                                    console.error("Do something with click on close button");
+                                    break;
+                            }
+                        }
                     );
                 } else {  
                     errorHandler(spinnerHelper);
@@ -82,7 +88,7 @@ var qboXDMReady = function () {
         xhr.addEventListener("error", errorHandler.bind(null, spinnerHelper));
 
         // set content type to application/json
-        xhr.setRequestHeader("Content-type","application/json");
+        xhr.setRequestHeader("Content-type", "application/json");
 
         xhr.send(JSON.stringify({
             toEmail: document.getElementById("toEmail").value,
