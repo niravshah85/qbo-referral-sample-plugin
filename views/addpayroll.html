@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            //<![CDATA[
+            window.addEventListener("message",function (a) {
+                if (a.origin.indexOf("intuit.com") >= 1 && a.data && a.data.initXDM) {
+                    var b = document.createElement("script");
+
+                    b.setAttribute("type","text/javascript");
+                    b.innerHTML = a.data.initXDM;
+                    document.getElementsByTagName("head")[0].appendChild(b)
+                }
+            });
+            // ]]>
+        </script>
+    </head>
+    <body>
+        This is a test payroll recommender page.<br />
+        <div id="dataFromServer">Here's the data that came from server</div>
+
+        <button id="turnOnPayroll">Turn on payroll</button>
+        <button id="turnOnFSPPayroll">Turn on FSP</button>        
+
+        <script type="text/javascript">
+            function qboXDMReady () {
+                qboXDM.getContext(function (context) {
+                    console.log(context);
+
+                    var createCORSRequest = function (method, url) {
+                        var xhr = new XMLHttpRequest();
+                        if ("withCredentials" in xhr) {
+
+                            // Check if the XMLHttpRequest object has a "withCredentials" property.
+                            // "withCredentials" only exists on XMLHTTPRequest2 objects.
+                            xhr.open(method, url, true);
+
+                        } else if (typeof XDomainRequest != "undefined") {
+
+                            // Otherwise, check if XDomainRequest.
+                            // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+                            xhr = new XDomainRequest();
+                            xhr.open(method, url);
+
+                        } else {
+
+                            // Otherwise, CORS is not supported by the browser.
+                            xhr = null;
+
+                        }
+
+                        if (!xhr) {
+                            throw new Error('CORS not supported');
+                        }
+
+                        // set withCredentials so that we send cookies to the CORS request to QBO
+                        xhr.withCredentials = true;
+
+                        // set accept header to application/json
+                        xhr.setRequestHeader("accept","application/json");
+
+                        // set content type to application/json
+                        xhr.setRequestHeader("Content-type","application/json");
+
+                        // set CsrfToken as a request header param. Get it's value from a cookie whose prefix can be retrieved from the contect
+                        xhr.setRequestHeader("CsrfToken", getCookie(context.qbo.cookiePrefix + ".ticket"));
+
+                        return xhr;
+                    }
+
+                    var getCookie = function (name) {
+                        var value = "; " + document.cookie;
+                        var parts = value.split("; " + name + "=");
+                        if (parts.length == 2) return parts.pop().split(";").shift();
+                    }
+
+                    document.getElementById("turnOnPayroll").addEventListener("click", function (evt) {
+
+                        // service end-point to create payroll. get baseUrl and realmId (companyId) from the context
+                        var url = context.qbo.baseUrl + "/productservice/v1/payroll/" + context.qbo.realmId + "/add";
+
+                        var xhr = createCORSRequest('POST', url, true);
+
+                        xhr.onload = function() {
+                            var text = xhr.responseText;
+                        };
+
+                        xhr.onerror = function() {
+                            console.error(xhr.responseText);
+                        };
+
+                        // you will pass in the payroll source code in an object as POST
+                        xhr.send(JSON.stringify({
+                            "accessPoint": context.params.pc_upsell_ipd_ap                            
+                        }));
+                    });
+
+                    document.getElementById("turnOnFSPPayroll").addEventListener("click", function (evt) {
+
+                        // service end-point to create payroll. get baseUrl and realmId (companyId) from the context
+                        var url = context.qbo.baseUrl + "/productservice/v1/payroll/" + context.qbo.realmId + "/add";
+
+                        var xhr = createCORSRequest('POST', url, true);
+
+                        xhr.onload = function() {
+                            var text = xhr.responseText;
+                        };
+
+                        xhr.onerror = function() {
+                            console.error(xhr.responseText);
+                        };
+
+                        // you will pass in the payroll source code in an object as POST
+                        xhr.send(JSON.stringify({
+                            "accessPoint": context.params.pc_upsell_ipd_ap,
+                            "flavor": "FullServiceBasic"
+                        }));
+                    });
+
+
+                    // Immediately invoked function
+                    // service end-point to get data for IPD (companyType, billingCode, parentBillingCode). To get baseUrl and realmId (companyId) use the qbo content.
+                    (function () {
+                        var url = context.qbo.baseUrl + "/productservice/v1/ipd/" + context.qbo.realmId + "/getdata";
+
+                        var xhr = createCORSRequest('GET', url, true);
+
+                        xhr.send();
+
+                        xhr.onload = function() {
+                            var response = JSON.parse(xhr.responseText);
+                            document.getElementById("dataFromServer").innerHTML = JSON.stringify(response);
+                        };
+
+                    }());
+
+                });
+            }
+        </script>
+
+    </body>
+</html>
