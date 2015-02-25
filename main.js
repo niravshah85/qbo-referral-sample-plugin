@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var sendemail = require('./routes/sendemail');
 var referral = require('./routes/referral');
+var dialog = require('./routes/dialog');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use("/sendemail", sendemail);
 app.use("/referral", referral);
+app.use("/dialog", dialog);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
